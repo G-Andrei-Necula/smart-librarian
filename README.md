@@ -8,22 +8,22 @@ An intelligent AI chatbot that recommends books based on user interests using RA
 - **AI Chatbot**: Conversational interface powered by GPT-4
 - **Tool Calling**: Detailed book summaries via OpenAI function calling
 - **Content Filtering**: Basic inappropriate language detection
-- **Multiple Interfaces**: Both CLI and Streamlit web interface
+- **Modern Web UI**: React frontend with FastAPI backend
+- **CLI Interface**: Command-line option for developers
 - **Romanian Language Support**: Optimized for Romanian interactions
 
 ## 🏗️ Architecture
 
 ```
 ┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐
-│   User Input    │───▶│  Vector Store   │───▶│   OpenAI GPT    │
-│                 │    │   (ChromaDB)    │    │   + Function    │
+│  React Frontend │───▶│  FastAPI Backend│───▶│   OpenAI GPT    │
+│  (Port 3001)    │    │   (Port 8000)   │    │   + Function    │
 └─────────────────┘    └─────────────────┘    │    Calling      │
-                                              └─────────────────┘
                               │                         │
                               ▼                         ▼
                     ┌─────────────────┐    ┌─────────────────┐
-                    │ Semantic Search │    │ Book Summaries  │
-                    │   Results       │    │     Tool        │
+                    │  ChromaDB       │    │ Book Summaries  │
+                    │  Vector Store   │    │     Tool        │
                     └─────────────────┘    └─────────────────┘
 ```
 
@@ -105,7 +105,7 @@ Backend runs on: `http://localhost:8000`
 cd frontend
 npm start
 ```
-Frontend runs on: `http://localhost:3000`
+**Frontend runs on: `http://localhost:3001`**
 
 #### Option B: CLI Interface
 ```bash
@@ -182,7 +182,7 @@ smart_librarian/
 ## 💬 Usage Examples
 
 ### Web Interface
-1. Open `http://localhost:3000` in your browser
+1. Open `http://localhost:3001` in your browser
 2. Type your book preferences in the chat
 3. Get AI-powered recommendations with detailed summaries
 4. Browse available books in the sidebar
@@ -450,7 +450,7 @@ uvicorn backend:app --reload --host 0.0.0.0 --port 8000
 ```bash
 cd frontend
 npm start
-# React dev server with hot reload on port 3000
+# React dev server with hot reload on port 3001
 ```
 
 ### Production Build
